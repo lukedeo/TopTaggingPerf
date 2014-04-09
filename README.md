@@ -3,6 +3,12 @@ TopTaggingPerf
 
 Python Scripts for Top Tagging Performance plotting
 
+Clone this repository with 
+
+```
+git clone git@github.com:lukedeo/TopTaggingPerf.git
+```
+
 Usage is simple, and can be run interactively. First, put `export PYTHONPATH+=:/path/to/TopTaggingPerf` in your `~/.bashrc`. 
 
 We assume you have an record array called `data` pulled from a tree using `rootpy/root_numpy` interface.
