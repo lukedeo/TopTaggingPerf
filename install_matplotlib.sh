@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ~/pystuff
 # Install Mock
 wget https://pypi.python.org/packages/source/m/mock/mock-1.0.1.tar.gz#md5=c3971991738caa55ec7c356bbc154ee2 --no-check-certificate
