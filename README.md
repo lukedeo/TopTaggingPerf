@@ -22,7 +22,7 @@ We assume you have an record array called `data` pulled from a tree using `rootp
 >>>
 >>> net = agilepy.NeuralNet()
 >>> net.load('NetworkFile.yaml')
->>> predictions = net.predict(data)[0] #bugfix will remove need for the [0]
+>>> predictions = net.predict(data)['top_predicted'][0] #bugfix will remove need for the [0]
 >>>
 >>> add_tagger(r'AGILETopTagger $\ell_1$ Regularized, Denoising', 'red', general_roc_weighted(data, predictions, data['mcevt_weight_flat'], 10000), taggers)
 >>>
