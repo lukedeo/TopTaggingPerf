@@ -7,7 +7,6 @@
 #PBS -m ae
 #PBS -M luke.deoliveira@yale.edu
 
-export PYTHONPATH+=:~/TopTaggingPerf
 cd $PBS_O_WORKDIR 
 mkdir -p output
 echo 'submitted from: ' $PBS_O_WORKDIR 
