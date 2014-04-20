@@ -68,7 +68,14 @@ def generate_taggers(schema):
 		net.load(taggerfile)
 		predictions = net.predict(data)[0]
 		add_tagger(specifications['name'], specifications['color'], 
-			general_roc_weighted(data, predictions['top_predicted'], data[schema['weights']], 40000), taggers)
+			general_roc_weighted(data, predictions['top_predicted'], data[schema['weights']], 20000), taggers)
+
+	if schema.has_key('benchmarks'):
+		if schema['benchmarks'].has_key('scans'):
+			for var, specifications in schema['benchmarks']['scans'].iteritems():
+				print 'Applying scan on ' + var
+				add_tagger(specifications['name'], specifications['color'], 
+					general_roc_weighted(data, data[var], data['mcevt_weight_flat'], 20000), taggers)
 
 	return taggers
 
