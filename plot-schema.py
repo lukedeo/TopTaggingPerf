@@ -62,20 +62,26 @@ def generate_taggers(schema):
 
 	taggers = {}
 
-	for taggerfile, specifications in schema['taggers'].iteritems():
-		print 'Working on ' + taggerfile
-		net = apy.NeuralNet()
-		net.load(taggerfile)
-		predictions = net.predict(data)[0]
-		add_tagger(specifications['name'], specifications['color'], 
-			general_roc_weighted(data, predictions['top_predicted'], data[schema['weights']], 20000), taggers)
+	if schema.has_key('taggers'):
+		for taggerfile, specifications in schema['taggers'].iteritems():
+			print 'Working on ' + taggerfile
+			net = apy.NeuralNet()
+			net.load(taggerfile)
+			predictions = net.predict(data)[0]
+			add_tagger(specifications['name'], specifications['color'], 
+				general_roc_weighted(data, predictions['top_predicted'], data[schema['weights']], 10000), taggers)
 
 	if schema.has_key('benchmarks'):
 		if schema['benchmarks'].has_key('scans'):
 			for var, specifications in schema['benchmarks']['scans'].iteritems():
 				print 'Applying scan on ' + var
 				add_tagger(specifications['name'], specifications['color'], 
-					general_roc_weighted(data, data[var], data['mcevt_weight_flat'], 20000), taggers)
+					general_roc_weighted(data, data[var], data['mcevt_weight_flat'], 10000), taggers)
+		if schema['benchmarks'].has_key('taggers'):
+			for function, specifications in schema['benchmarks']['taggers'].iteritems():
+				print 'Applying tagger defined by function ' + function
+				call = "add_tagger(specifications['name'], specifications['color'], " + function + "(data, data['mcevt_weight_flat'], 10000), taggers)"
+				eval(call)
 
 	return taggers
 
@@ -86,10 +92,8 @@ def plot_roc(dictionary, name = None):
 		savename = 'ROC_' + m.hexdigest() + '.pdf'
 	else:
 		savename = name
-	roc = ROC_plotter(dictionary, linewidth=2.1)
+	roc = ROC_plotter(dictionary, linewidth=2.1, signal = schema['signal'], background = schema['background'], title['title'])
 	roc.savefig(savename)
-
-
 
 
 
