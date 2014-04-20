@@ -36,17 +36,20 @@ def pt_plot(data, pt_label = 'fjet_pt_flat', weighted = None, log = False, bins 
 	return fig
 
 
-def sb_plot(data, label = 'fjet_pt_flat', weighted = None, log = False, bins = 100, logcount = False):
+def sb_plot(data, label = 'fjet_pt_flat', disc = None, weighted = None, log = False, bins = 100, logcount = False):
 	fig = plt.figure(figsize=(11.69, 8.27), dpi=100) 
 	ax = plt.subplot(1,1,1)
-	pt = data[label]
+	if disc is None:
+		pt = data[label]
+	else:
+		pt = disc
 	if log:
 		ax.set_xscale('log')
 	bins = np.linspace(np.min(pt), np.max(pt), bins)
 	if log:
 		plt.xlabel(r"$\log(p_T)$ in GeV", fontsize=20)
 	else:
-		plt.xlabel(r"" + label, fontsize=20)
+		plt.xlabel(r"" + str(label), fontsize=20)
 
 	plt.ylabel(r"Count", fontsize=20)
 	plt.title(r"Distribution of Jet " + label)
