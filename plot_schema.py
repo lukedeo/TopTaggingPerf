@@ -1,6 +1,6 @@
 import yaml
 from .ROC import *
-import .client as apy
+import client as apy
 from rootpy.io import root_open
 import root_numpy as rn
 import numpy as np
@@ -25,7 +25,7 @@ def _tree_to_array(schema, to_npy = False):
 		print 'Writing to *.npy file...'
 		varlist = "".join(this_sel.split()).replace('(', '').replace(')', '').split('&&')
 		varlist.sort()
-		hash_name = os.path.basename(schema['sample']['file']) + schema['sample']['tree'] + ''.join(varlist) + str(this_step)
+		hash_name = os.path.abspath(schema['sample']['file']) + schema['sample']['tree'] + ''.join(varlist) + str(this_step)
 		m = hashlib.sha1()
 		m.update(hash_name)
 		np.save(os.path.dirname(schema['sample']['file']) + '/' + m.hexdigest() + '.npy', arr)
@@ -43,7 +43,7 @@ def _get_data_hash(schema):
 		this_step = None
 	varlist = "".join(this_sel.split()).replace('(', '').replace(')', '').split('&&')
 	varlist.sort()
-	hash_name = os.path.basename(schema['sample']['file']) + schema['sample']['tree'] + ''.join(varlist) + str(this_step)
+	hash_name = os.path.abspath(schema['sample']['file']) + schema['sample']['tree'] + ''.join(varlist) + str(this_step)
 	m = hashlib.sha1()
 	m.update(hash_name)
 	return m.hexdigest()
@@ -92,7 +92,7 @@ def plot_roc(dictionary, name = None):
 		savename = 'ROC_' + m.hexdigest() + '.pdf'
 	else:
 		savename = name
-	roc = ROC_plotter(dictionary, linewidth=2.1, signal = schema['signal'], background = schema['background'], title['title'])
+	roc = ROC_plotter(dictionary, linewidth=2.1, signal = schema['signal'], background = schema['background'], title = schema['title'])
 	roc.savefig(savename)
 
 
