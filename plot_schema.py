@@ -85,7 +85,7 @@ def generate_taggers(schema):
 
 	return taggers
 
-def plot_roc(dictionary, name = None):
+def plot_roc(dictionary, schema, name = None):
 	if name is None:
 		m = hashlib.sha1()
 		m.update(dictionary.__repr__())
