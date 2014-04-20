@@ -67,6 +67,7 @@ def generate_taggers(schema):
 
 	for taggerfile, specifications in schema['taggers']:
 		net = apy.NeuralNet()
+		net.load(taggerfile)
 
 
 
