@@ -1,0 +1,46 @@
+sample:
+  file: /home/hep/golling/lpd7/scratch_space/mc12_8TeV_JZX_Zprime_perfntuple.root
+  tree: ntup
+  selection: (CONF_sample==1)&&(fjet_pt_flat>550000)&&(fjet_pt_flat<1100000)&&(fjet_eta_flat<1.2)&&(fjet_eta_flat>-1.2)&&(fjet_Tau2_flat>-10)&&(fjet_Tau3_flat>-10)
+  step: 1
+weights: mcevt_weight_flat
+signal: "$Z', m_{Z'} = 1.75$ TeV"
+background: JZ4
+title: >
+  Top Tagging Efficiency vs. Rejection, $\vert\eta\vert < 1.2, m_{Z'} = 1.75$ TeV
+benchmarks:
+  scans:
+    fjet_SPLIT23_flat: 
+      name: '$\sqrt{d_{23}}$'
+      color: blue
+  taggers:
+    tagger_VI_roc_weighted: 
+      name: 'Tagger IV'
+      color: black
+taggers:
+  /home/hep/golling/lpd7/AGILETopTaggertop~fjet_Tau1_flat+fjet_Tau2_flat+fjet_Tau3_flat+fjet_SPLIT23_flat+Tau32+Tau21.yaml: 
+    name: 'AGILETopTagger, Hi+Lo variables, pretraining.'
+    color: red
+  /home/hep/golling/lpd7/AGILEPack/AGILETopTaggertop~fjet_Tau1_flat+fjet_Tau2_flat+fjet_Tau3_flat+fjet_SPLIT23_flat.yaml: 
+    name: 'AGILETopTagger, Lo variables, pretraining.'
+    color: green
+  /home/hep/golling/lpd7/AGILEPack/AAGILETopTaggertop~Tau32+Tau21+fjet_SPLIT23_flat.yaml:
+    name: 'AGILETopTagger, Hi variables, pretraining.'
+    color: magenta
+  /home/hep/golling/lpd7/AGILEPack/AGILETopTagger_no_pretrain_top~fjet_Tau1_flat+fjet_Tau2_flat+fjet_Tau3_flat+fjet_SPLIT23_flat+Tau32+Tau21.yaml: 
+    name: 'AGILETopTagger, Hi+Lo variables, no pretraining.'
+    color: gold
+  /home/hep/golling/lpd7/AGILEPack/AGILETopTagger_no_pretrain_top~fjet_Tau1_flat+fjet_Tau2_flat+fjet_Tau3_flat+fjet_SPLIT23_flat.yaml: 
+    name: 'AGILETopTagger, Lo variables, no pretraining.'
+    color: aqua
+  /home/hep/golling/lpd7/AGILEPack/AGILETopTagger_no_pretrain_top~Tau32+Tau21+fjet_SPLIT23_flat.yaml:
+    name: 'AGILETopTagger, Hi variables, no pretraining.'
+    color: orange
+
+
+
+
+
+
+
+
