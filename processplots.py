@@ -7,8 +7,9 @@ import datetime
 if __name__ == '__main__':
 	filename = str(sys.argv[0])
 	f = open(filename, 'r')
-	schema = yaml.load(f)
 	
+	schema = yaml.load(f)
+
 	taggers = tt.generate_taggers(schema)
 
 	now = datetime.datetime.now()

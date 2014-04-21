@@ -11,6 +11,4 @@ cd $PBS_O_WORKDIR
 mkdir -p output
 echo 'submitted from: ' $PBS_O_WORKDIR 
 
-
-
 python ./processplots.py ./tagger_6_study.yaml
