@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import yaml
 import TopTaggingPerf as tt
@@ -5,7 +6,7 @@ import datetime
 
 
 if __name__ == '__main__':
-	filename = str(sys.argv[0])
+	filename = str(sys.argv[1])
 	f = open(filename, 'r')
 	
 	schema = yaml.load(f)
