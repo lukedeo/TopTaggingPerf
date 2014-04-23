@@ -183,15 +183,16 @@ def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = Fals
 	plt.grid(b = True, which = 'major')
 	max_ = 0
 	for tagger, data in taggerdict.iteritems():
-		sel = data['efficiency'] >= .7 * min_eff
-		if np.max(data['rejection']) > max_:
-			max_ = np.max(data['rejection'])
-		plt.plot(data['efficiency'], data['rejection'], '-', label = r''+tagger, color = data['color'], linewidth=linewidth)
+		sel = (data['efficiency'] >= min_eff) & (data['efficiency'] <= max_eff)
+		if np.max(data['rejection'][sel]) > max_:
+			max_ = np.max(data['rejection'][sel])
+		plt.plot(data['efficiency'][sel], data['rejection'][sel], '-', label = r''+tagger, color = data['color'], linewidth=linewidth)
 
 	ax = plt.subplot(1,1,1)
 	for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] + ax.get_xticklabels() + ax.get_yticklabels()):
 		item.set_fontsize(20)
-	if logscale:	
+	
+	if logscale == True:	
 		plt.ylim(1,10 ** 3)
 		ax.set_yscale('log')
 	ax.set_xlabel(r'$\epsilon_{t}$, Top efficiency (' + signal + ')')
