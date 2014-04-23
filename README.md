@@ -1,7 +1,7 @@
 TopTaggingPerf
 ==============
 
-Python Scripts for Top Tagging Performance plotting
+<em>Python Scripts for Top Tagging Performance plotting</em>
 
 Clone this repository with 
 

@@ -85,14 +85,14 @@ def generate_taggers(schema):
 
 	return taggers
 
-def plot_roc(dictionary, schema, name = None):
+def plot_roc(dictionary, schema, name = None, min_eff = 0, max_eff = 1, logscale = True):
 	if name is None:
 		m = hashlib.sha1()
 		m.update(dictionary.__repr__())
 		savename = 'ROC_' + m.hexdigest() + '.pdf'
 	else:
 		savename = name
-	roc = ROC_plotter(dictionary, linewidth=2.1, signal = schema['signal'], background = schema['background'], title = schema['title'])
+	roc = ROC_plotter(dictionary, min_eff = min_eff, max_eff = max_eff, linewidth=2.1, signal = schema['signal'], background = schema['background'], title = schema['title'], logscale = logscale)
 	roc.savefig(savename)
 
 

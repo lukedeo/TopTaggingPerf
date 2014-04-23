@@ -175,7 +175,7 @@ def tagger_VI_roc_weighted(data, weights, bins = 2000):
 
 
 
-def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = False, signal = "$Z', m_{Z'} = 1.75$ TeV", background = "JZ4W", title = "Top Tagging Efficiency vs. Rejection, $\vert\eta\vert < 1.2, m_{Z'} = 1.75$ TeV "):
+def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = False, signal = "$Z', m_{Z'} = 1.75$ TeV", background = "JZ4W", title = "Top Tagging Efficiency vs. Rejection, $\vert\eta\vert < 1.2, m_{Z'} = 1.75$ TeV ", logscale = True):
 	fig = plt.figure(figsize=(11.69, 8.27), dpi=100)
 	ax = fig.add_subplot(111)
 	plt.xlim(min_eff,max_eff)
@@ -191,8 +191,9 @@ def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = Fals
 	ax = plt.subplot(1,1,1)
 	for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] + ax.get_xticklabels() + ax.get_yticklabels()):
 		item.set_fontsize(20)
-	plt.ylim(1,10 ** 3)
-	ax.set_yscale('log')
+	if logscale:	
+		plt.ylim(1,10 ** 3)
+		ax.set_yscale('log')
 	ax.set_xlabel(r'$\epsilon_{t}$, Top efficiency (' + signal + ')')
 	ax.set_ylabel(r"QCD ("+ background + ") rejection")
 
