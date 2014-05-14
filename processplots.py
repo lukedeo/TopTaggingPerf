@@ -16,5 +16,5 @@ if __name__ == '__main__':
 	now = datetime.datetime.now()
 	timestamp = now.strftime("%Y-%m-%d_%H:%M")
 
-	tt.plot_roc(taggers, schema, 'ROC_plots_' + timestamp + '.pdf')
+	tt.plot_roc(taggers, schema, 'ROC_plots_' + timestamp + '.pdf', save_arr = True)
 	tt.plot_roc(taggers, schema, 'ROC_plots_' + timestamp + '_zoom_.pdf', 0.4, 0.6, False)

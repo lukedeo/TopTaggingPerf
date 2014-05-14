@@ -175,7 +175,7 @@ def tagger_VI_roc_weighted(data, weights, bins = 2000):
 
 
 
-def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = False, signal = "$Z', m_{Z'} = 1.75$ TeV", background = "JZ4W", title = "Top Tagging Efficiency vs. Rejection, $\vert\eta\vert < 1.2, m_{Z'} = 1.75$ TeV ", logscale = True):
+def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = False, signal = "$Z', m_{Z'} = 1.75$ TeV", background = "JZ4W", title = "Top Tagging Efficiency vs. Rejection, $\vert\eta\vert < 1.2, m_{Z'} = 1.75$ TeV ", logscale = True, save_arr = False):
 	fig = plt.figure(figsize=(11.69, 8.27), dpi=100)
 	ax = fig.add_subplot(111)
 	plt.xlim(min_eff,max_eff)
@@ -186,6 +186,8 @@ def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = Fals
 		sel = (data['efficiency'] >= min_eff) & (data['efficiency'] <= max_eff)
 		if np.max(data['rejection'][sel]) > max_:
 			max_ = np.max(data['rejection'][sel])
+		if save_arr:
+			data.tofile(tagger+'_save.csv', sep=",")
 		plt.plot(data['efficiency'][sel], data['rejection'][sel], '-', label = r''+tagger, color = data['color'], linewidth=linewidth)
 
 	ax = plt.subplot(1,1,1)
