@@ -187,7 +187,10 @@ def ROC_plotter(taggerdict, min_eff = 0, max_eff = 1, linewidth = 1.4, pp = Fals
 		if np.max(data['rejection'][sel]) > max_:
 			max_ = np.max(data['rejection'][sel])
 		if save_arr:
-			data.tofile(tagger+'_save.csv', sep=",")
+			ar = np.zeros((data['rejection'][sel].shape[0], 2))
+			ar[:, 0] = data['efficiency'][sel]
+			ar[:, 1] = data['rejection'][sel]
+			np.savetxt(tagger+'_save.csv', ar, delimiter=',')
 		plt.plot(data['efficiency'][sel], data['rejection'][sel], '-', label = r''+tagger, color = data['color'], linewidth=linewidth)
 
 	ax = plt.subplot(1,1,1)
