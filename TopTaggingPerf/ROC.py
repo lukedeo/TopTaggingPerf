@@ -1,5 +1,7 @@
 import numpy as np
 import math
+import matplotlib
+matplotlib.use('PDF')
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
 from matplotlib.mlab import griddata
