@@ -38,7 +38,7 @@ def pt_plot(data, pt_label = 'fjet_pt_flat', weighted = None, log = False, bins 
 	return fig
 
 
-def sb_plot(data, label = 'fjet_pt_flat', disc = None, weighted = None, log = False, bins = 100, logcount = False):
+def sb_plot(data, signal = 'top', label = 'fjet_pt_flat', disc = None, weighted = None, log = False, bins = 100, logcount = False):
 	fig = plt.figure(figsize=(11.69, 8.27), dpi=100) 
 	ax = plt.subplot(1,1,1)
 	if disc is None:
@@ -49,7 +49,7 @@ def sb_plot(data, label = 'fjet_pt_flat', disc = None, weighted = None, log = Fa
 		ax.set_xscale('log')
 	bins = np.linspace(np.min(pt), np.max(pt), bins)
 	if log:
-		plt.xlabel(r"$\log(p_T)$ in GeV", fontsize=20)
+		plt.xlabel(r"$\log$"+ str(label), fontsize=20)
 	else:
 		plt.xlabel(r"" + str(label), fontsize=20)
 
@@ -58,11 +58,11 @@ def sb_plot(data, label = 'fjet_pt_flat', disc = None, weighted = None, log = Fa
 	
 	plt.xlim(np.min(pt), np.max(pt))
 	if weighted is None:
-		plt.hist(pt[data['top'] == 1], histtype='step', log = logcount, bins = bins, color = 'red', label = r"$Z'$ jets, $m_{Z'} = 1.75 \mathrm{TeV}$")
-		plt.hist(pt[data['top'] == 0], histtype='step', log = logcount, bins = bins, color = 'blue', label = "JZ4W Jets")
+		plt.hist(pt[data[signal] == 1], histtype='step', log = logcount, bins = bins, color = 'red', label = r"Signal = " + str(signal))
+		plt.hist(pt[data[signal] == 0], histtype='step', log = logcount, bins = bins, color = 'blue', label = "Background")
 	else:
-		plt.hist(pt[data['top'] == 1], histtype='step', log = logcount, bins = bins, color = 'red', label = r"$Z'$ jets, $m_{Z'} = \mathsf{1.75 TeV}$", weights=weighted[data['top'] == 1])
-		plt.hist(pt[data['top'] == 0], histtype='step', log = logcount, bins = bins, color = 'blue', label = "JZ4W Jets", weights=weighted[data['top'] == 0])
+		plt.hist(pt[data[signal] == 1], histtype='step', log = logcount, bins = bins, color = 'red', label = r"Signal = " + str(signal), weights=weighted[data[signal] == 1])
+		plt.hist(pt[data[signal] == 0], histtype='step', log = logcount, bins = bins, color = 'blue', label = "Background", weights=weighted[data[signal] == 0])
 	
 	plt.legend(loc = 1)
 	plt.show()
